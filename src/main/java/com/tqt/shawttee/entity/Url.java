@@ -22,7 +22,7 @@ public class Url {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String originalUrl;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String shortCode;
 
     @CreatedDate

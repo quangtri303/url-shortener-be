@@ -20,6 +20,9 @@ public class UrlService {
 
     @Transactional
     public Url shortenUrl(String originalUrl, User owner){
+        if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
+            originalUrl = "https://" + originalUrl;
+        }
         Url url = new Url();
         url.setOriginalUrl(originalUrl);
         url.setOwner(owner);
