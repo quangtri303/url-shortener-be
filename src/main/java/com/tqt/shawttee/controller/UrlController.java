@@ -2,10 +2,12 @@ package com.tqt.shawttee.controller;
 
 import com.tqt.shawttee.dto.ShortenRequest;
 import com.tqt.shawttee.entity.Url;
+import com.tqt.shawttee.entity.User;
 import com.tqt.shawttee.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -17,8 +19,8 @@ public class UrlController {
     private UrlService urlService;
 
     @PostMapping("/url")
-    public ResponseEntity<Url> shortenUrl(@RequestBody ShortenRequest shortenRequest) {
-        return ResponseEntity.ok(urlService.shortenUrl(shortenRequest.getOriginalUrl(),null));
+    public ResponseEntity<Url> shortenUrl(@RequestBody ShortenRequest shortenRequest, @AuthenticationPrincipal User user ) {
+        return ResponseEntity.ok(urlService.shortenUrl(shortenRequest.getOriginalUrl(),user));
     }
 
     @GetMapping("/{shortCode}")
