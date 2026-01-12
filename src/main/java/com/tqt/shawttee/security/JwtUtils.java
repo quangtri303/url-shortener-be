@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
@@ -22,11 +23,15 @@ public class JwtUtils {
     private final int jwtExpirationMs = 86400000;
 
 
-    public String generateToken(String username) {
+    public String generateToken(String username, Long id, String role, String createdAt, String provider) {
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .subject(username)
+                .claim("id", id)
+                .claim("role", role)
+                .claim("createdAt", createdAt)
+                .claim("provider", provider)
+                .issuedAt(new Date())
+                .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }

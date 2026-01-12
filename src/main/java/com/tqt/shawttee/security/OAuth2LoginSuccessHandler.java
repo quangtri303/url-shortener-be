@@ -68,7 +68,8 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                             .role("USER")
                             .build());
                 });
-        String token = jwtUtils.generateToken(user.getEmail());
+        String token = jwtUtils.generateToken(user.getEmail(), user.getId(), user.getRole(), user.getCreatedAt().toString(), user.getProvider().name());
+
         this.setDefaultTargetUrl(frontendUrl + "/oauth2/redirect?token=" + token);
         super.onAuthenticationSuccess(request, response, authentication);
     }
