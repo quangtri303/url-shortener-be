@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/urls")
@@ -30,5 +31,10 @@ public class UrlController {
                 .status(HttpStatus.FOUND)
                 .location(URI.create(originalUrl))
                 .build();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Url>> getAllUrls(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(urlService.getUserUrls(user));
     }
 }

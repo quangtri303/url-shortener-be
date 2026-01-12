@@ -27,7 +27,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        //check google or github
+        //check google or GitHub
         OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
         String registrationId = authToken.getAuthorizedClientRegistrationId();
 
@@ -41,7 +41,6 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         if ("google".equals(registrationId)) {
             email = (String) attributes.get("email");
             providerId = (String) attributes.get("sub");
-            providerEnum = Provider.GOOGLE;
         } else if ("github".equals(registrationId)) {
             email = (String) attributes.get("email");
             Integer id = (Integer) attributes.get("id");

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class UrlService {
@@ -40,5 +41,9 @@ public class UrlService {
             throw new RuntimeException("Url Expired");
         }
         return url.getOriginalUrl();
+    }
+
+    public List<Url> getUserUrls(User user) {
+        return urlRepository.findByOwner(user);
     }
 }
