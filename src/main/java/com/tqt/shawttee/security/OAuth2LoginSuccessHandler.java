@@ -22,7 +22,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     private UserRepository userRepository;
     @Autowired
     private JwtUtils jwtUtils;
-    @Value("${frontend.url:http://localhost:5173}")
+    @Value("${FE_URL}")
     private String frontendUrl;
 
     @Override

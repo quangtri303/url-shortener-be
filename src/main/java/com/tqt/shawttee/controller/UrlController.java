@@ -14,12 +14,11 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/urls")
 public class UrlController {
     @Autowired
     private UrlService urlService;
 
-    @PostMapping("/url")
+    @PostMapping("/api/urls")
     public ResponseEntity<Url> shortenUrl(@RequestBody ShortenRequest shortenRequest, @AuthenticationPrincipal User user ) {
         return ResponseEntity.ok(urlService.shortenUrl(shortenRequest.getOriginalUrl(),user));
     }
@@ -33,7 +32,7 @@ public class UrlController {
                 .build();
     }
 
-    @GetMapping("/")
+    @GetMapping("/api/urls")
     public ResponseEntity<List<Url>> getAllUrls(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(urlService.getUserUrls(user));
     }
